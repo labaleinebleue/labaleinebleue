@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import { Fragment } from 'react'
-import styles from '../styles/IndexPage.module.css'
+import Head from 'next/head';
+import { Fragment } from 'react';
+import styles from '../styles/IndexPage.module.css';
 
 export default function IndexPage() {
   return (
@@ -9,5 +9,5 @@ export default function IndexPage() {
         <title>La Baleine Bleue</title>
       </Head>
     </Fragment>
-  )
+  );
 }

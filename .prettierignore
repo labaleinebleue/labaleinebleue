@@ -1,0 +1,4 @@
+# Prettier CLI already ignores files located in the `node_modules` directory
+# https://prettier.io/docs/en/cli.html#--with-node-modules
+
+.next/
