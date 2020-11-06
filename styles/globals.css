@@ -14,3 +14,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+pre {
+  background-color: #ccc;
+  padding: 1rem;
+  overflow-x: scroll;
+}
