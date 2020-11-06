@@ -1,0 +1,69 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # https://github.com/actions/checkout#usage
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # https://github.com/google-github-actions/setup-gcloud/blob/master/setup-gcloud/README.md#usage
+      - name: Setup Google Cloud Platform credentials
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GOOGLE_CLOUD_PLATFORM_PROJECT_ID }}
+          service_account_key: ${{ secrets.GOOGLE_CLOUD_PLATFORM_SERVICE_ACCOUNT_KEY }}
+          export_default_credentials: true
+
+      - run: gcloud info
+
+      # https://github.com/actions/setup-node#usage
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      # https://github.com/actions/cache#usage
+      # https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Yarn dependencies
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+
+      - name: Create an optimized production build
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: build
+        env:
+          INVENTORY_CODE_TO_ID_SECRET: ${{ secrets.INVENTORY_CODE_TO_ID_SECRET }}
+          INVENTORY_SPREADSHEET_ID: ${{ secrets.INVENTORY_SPREADSHEET_ID }}
+          NODE_ENV: production
+
+      - name: Static HTML Export
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: export
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
