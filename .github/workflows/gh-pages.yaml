@@ -56,6 +56,9 @@ jobs:
         with:
           cmd: build
         env:
+          # `BASE_PATH` is used to configure GitHub Pages origin,
+          # which is currently: https://labaleinebleue.github.io/labaleinebleue
+          BASE_PATH: /labaleinebleue
           INVENTORY_CODE_TO_ID_SECRET: ${{ secrets.INVENTORY_CODE_TO_ID_SECRET }}
           INVENTORY_SPREADSHEET_ID: ${{ secrets.INVENTORY_SPREADSHEET_ID }}
           NODE_ENV: production
