@@ -1,11 +1,10 @@
-import _ from 'lodash';
 import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { fetchCategories } from '../../lib/category';
 import { buildProductPageHref } from '../../lib/link';
-import { fetchProducts } from '../../lib/product';
+import { fetchProductCategories, fetchProducts } from '../../lib/product';
+import { keyByValueOf } from '../../lib/util';
 import { fetchVendors, fetchVendorBySlug } from '../../lib/vendor';
 
 export default function BrowseByVendorPage({
@@ -68,17 +67,12 @@ export async function getStaticProps({ params }) {
   const products = await fetchProducts({ vendorCode: vendor.code });
 
   // Fetch categories of fetched products
-  const productCategoryCodes = _.uniq(_.map(products, 'categoryCode'));
-  const categories = await fetchCategories((category) =>
-    _.includes(productCategoryCodes, category.code)
-  );
-  const categoriesByCategoryCode = _.transform(
-    categories,
-    (result, category) => {
-      result[category.code] = category;
-    },
-    {}
-  );
+  const productCategories = await fetchProductCategories({
+    vendorCode: vendor.code,
+  });
+
+  // Arrange categories in an object keyed by category code
+  const categoriesByCategoryCode = keyByValueOf(productCategories, 'code');
 
   return { props: { categoriesByCategoryCode, products, vendor } };
 }

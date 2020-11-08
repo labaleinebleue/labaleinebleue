@@ -1,12 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { fetchCategories } from '../lib/category';
-import { fetchVendors } from '../lib/vendor';
 import {
   buildBrowseByCategoryPageHref,
   buildBrowseByVendorPageHref,
 } from '../lib/link';
+import { fetchProductCategories, fetchProductVendors } from '../lib/product';
 import styles from '../styles/IndexPage.module.css';
 
 export default function IndexPage({ categories, vendors }) {
@@ -42,8 +41,8 @@ export default function IndexPage({ categories, vendors }) {
 
 export async function getStaticProps() {
   const [categories, vendors] = await Promise.all([
-    fetchCategories(),
-    fetchVendors(),
+    fetchProductCategories(),
+    fetchProductVendors(),
   ]);
 
   return { props: { categories, vendors } };
