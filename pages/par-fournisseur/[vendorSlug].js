@@ -3,8 +3,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { buildProductPageHref } from '../../lib/link';
 import { fetchCategories } from '../../lib/category';
+import { buildProductPageHref } from '../../lib/link';
 import { fetchProducts } from '../../lib/product';
 import { fetchVendors, fetchVendorBySlug } from '../../lib/vendor';
 
