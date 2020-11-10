@@ -1,3 +1,3 @@
-# 🐳
+# 🐳 www.labaleinebleue.eus
 
-## La Baleine Bleue — Magasin de jouets à Saint-Jean-de-Luz
+Site vitrine de [La Baleine Bleue](https://www.labaleinebleue.eus/) — Magasin de jouets à Saint-Jean-de-Luz
