@@ -1,3 +1,5 @@
 module.exports = {
-  basePath: process.env.BASE_PATH,
+  images: {
+    domains: ['static.labaleinebleue.eus'],
+  },
 };
