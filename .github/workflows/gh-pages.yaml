@@ -56,8 +56,8 @@ jobs:
         with:
           cmd: build
         env:
-          INVENTORY_CODE_TO_ID_SECRET: ${{ secrets.INVENTORY_CODE_TO_ID_SECRET }}
-          INVENTORY_SPREADSHEET_ID: ${{ secrets.INVENTORY_SPREADSHEET_ID }}
+          DATABASE_CODE_TO_ID_SECRET: ${{ secrets.DATABASE_CODE_TO_ID_SECRET }}
+          DATABASE_SPREADSHEET_ID: ${{ secrets.DATABASE_SPREADSHEET_ID }}
           NODE_ENV: production
 
       - name: Static HTML Export
