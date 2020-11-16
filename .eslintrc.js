@@ -48,5 +48,10 @@ module.exports = {
         sourceType: 'module',
       },
     },
+    // Allow usage of ECMAScript modules `import`/`export` syntax in scripts
+    {
+      files: ['bin/**/*.js'],
+      parserOptions: { sourceType: 'module' },
+    },
   ],
 };
