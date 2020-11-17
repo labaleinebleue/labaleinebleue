@@ -2,10 +2,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { buildProductPageHref } from '../../lib/link';
-import { fetchProductCategories, fetchProducts } from '../../lib/product';
-import { keyByValueOf } from '../../lib/util';
-import { fetchVendors, fetchVendorBySlug } from '../../lib/vendor';
+import { buildProductPageHref } from '@/lib/link';
+import { fetchProductCategories, fetchProducts } from '@/lib/product';
+import { keyByValueOf } from '@/lib/util';
+import { fetchVendors, fetchVendorBySlug } from '@/lib/vendor';
 
 export default function BrowseByVendorPage({
   categoriesByCategoryCode,

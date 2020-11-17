@@ -4,9 +4,9 @@ import { Fragment } from 'react';
 import {
   buildBrowseByCategoryPageHref,
   buildBrowseByVendorPageHref,
-} from '../lib/link';
-import { fetchProductCategories, fetchProductVendors } from '../lib/product';
-import styles from '../styles/IndexPage.module.css';
+} from '@/lib/link';
+import { fetchProductCategories, fetchProductVendors } from '@/lib/product';
+import styles from '@/styles/IndexPage.module.css';
 
 export default function IndexPage({ categories, vendors }) {
   return (

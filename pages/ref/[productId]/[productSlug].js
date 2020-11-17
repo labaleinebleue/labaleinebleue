@@ -2,9 +2,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { fetchCategoryByCode } from '../../../lib/category';
-import { fetchProducts, fetchProductById } from '../../../lib/product';
-import { fetchVendorByCode } from '../../../lib/vendor';
+import { fetchCategoryByCode } from '@/lib/category';
+import { fetchProducts, fetchProductById } from '@/lib/product';
+import { fetchVendorByCode } from '@/lib/vendor';
 
 export default function ProductPage({ category, product, vendor }) {
   return (
