@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Fragment } from 'react';
+import Header from '@/components/Header';
 import { fetchCategoryByCode } from '@/lib/category';
 import { fetchProducts, fetchProductById } from '@/lib/product';
 import { fetchVendorByCode } from '@/lib/vendor';
@@ -12,9 +12,8 @@ export default function ProductPage({ category, product, vendor }) {
       <Head>
         <title>Référence&nbsp;: {product.name}</title>
       </Head>
-      <h1>
-        <Link href="/">La Baleine Bleue</Link>
-      </h1>
+
+      <Header />
       <h2>{product.name}</h2>
       <p>{vendor.name}</p>
       <p>{category.name}</p>

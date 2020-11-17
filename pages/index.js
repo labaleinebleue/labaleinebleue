@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import Header from '@/components/Header';
 import {
   buildBrowseByCategoryPageHref,
   buildBrowseByVendorPageHref,
@@ -14,7 +15,7 @@ export default function IndexPage({ categories, vendors }) {
       <Head>
         <title>La Baleine Bleue</title>
       </Head>
-      <h1>La Baleine Bleue</h1>
+      <Header linkToIndexPage={false} />
       <h2>Par famille</h2>
       <ul>
         {categories.map((category) => (

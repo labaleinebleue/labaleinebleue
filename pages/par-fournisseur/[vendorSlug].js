@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import Header from '@/components/Header';
 import { buildProductPageHref } from '@/lib/link';
 import { fetchProductCategories, fetchProducts } from '@/lib/product';
 import { keyByValueOf } from '@/lib/util';
@@ -18,9 +19,7 @@ export default function BrowseByVendorPage({
         <title>Par fournisseur&nbsp;: {vendor.name}</title>
       </Head>
 
-      <h1>
-        <Link href="/">La Baleine Bleue</Link>
-      </h1>
+      <Header />
 
       <h2>Par fournisseur&nbsp;: {vendor.name}</h2>
 

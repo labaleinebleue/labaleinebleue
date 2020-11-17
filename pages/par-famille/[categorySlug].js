@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import Header from '@/components/Header';
 import { fetchCategories, fetchCategoryBySlug } from '@/lib/category';
 import { buildProductPageHref } from '@/lib/link';
 import { fetchProducts, fetchProductVendors } from '@/lib/product';
@@ -18,9 +19,7 @@ export default function BrowseByCategoryPage({
         <title>Par famille&nbsp;: {category.name}</title>
       </Head>
 
-      <h1>
-        <Link href="/">La Baleine Bleue</Link>
-      </h1>
+      <Header />
 
       <h2>Par famille&nbsp;: {category.name}</h2>
 
