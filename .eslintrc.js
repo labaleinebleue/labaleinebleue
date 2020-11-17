@@ -36,7 +36,7 @@ module.exports = {
       // - Enable support of globals common to both Node.js and the browser
       // - Allow usage of JSX even when React is not in scope
       // - Allow usage of ECMAScript modules `import`/`export` syntax
-      files: ['lib/**/*.js', 'pages/**/*.js'],
+      files: ['components/**/*.js', 'lib/**/*.js', 'pages/**/*.js'],
       env: {
         node: false,
         'shared-node-browser': true,
