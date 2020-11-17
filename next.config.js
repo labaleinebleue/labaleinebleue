@@ -1,5 +1,7 @@
 module.exports = {
   images: {
-    domains: ['static.labaleinebleue.eus'],
+    domains: ['res.cloudinary.com'],
+    loader: 'cloudinary',
+    path: 'https://res.cloudinary.com/labaleinebleue/image/upload',
   },
 };
