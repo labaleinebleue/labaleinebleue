@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { fetchCategoryByCode } from '../../../lib/category';
@@ -17,6 +18,30 @@ export default function ProductPage({ category, product, vendor }) {
       <h2>{product.name}</h2>
       <p>{vendor.name}</p>
       <p>{category.name}</p>
+      {product.images && (
+        <ul>
+          {product.images.map(({ href, width, height }) => (
+            <li
+              style={{
+                display: 'block',
+                position: 'relative',
+                width: '25vw',
+                height: '25vw',
+              }}
+            >
+              <Image
+                src={href}
+                alt={`Image : ${category.name} « ${product.name} »`}
+                layout="intrinsic"
+                objectFit="cover"
+                width={400}
+                height={Math.round(400 * (height / width))}
+                priority
+              />
+            </li>
+          ))}
+        </ul>
+      )}
       <pre>{JSON.stringify({ category, product, vendor })}</pre>
     </Fragment>
   );
