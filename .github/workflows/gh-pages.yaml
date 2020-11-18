@@ -27,7 +27,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14'
-          check-latest: true
 
       # https://github.com/actions/cache#usage
       # https://github.com/actions/cache/blob/main/examples.md#node---yarn
