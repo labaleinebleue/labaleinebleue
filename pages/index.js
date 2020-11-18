@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import Header from '@/components/Header';
+import Main from '@/components/Main';
 import {
   buildBrowseByCategoryPageHref,
   buildBrowseByVendorPageHref,
@@ -15,27 +16,31 @@ export default function IndexPage({ categories, vendors }) {
       <Head>
         <title>La Baleine Bleue</title>
       </Head>
+
       <Header linkToIndexPage={false} />
-      <h2>Par famille</h2>
-      <ul>
-        {categories.map((category) => (
-          <li key={`category:${category.slug}`}>
-            <Link href={buildBrowseByCategoryPageHref(category)}>
-              {category.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <h2>Par fournisseur</h2>
-      <ul>
-        {vendors.map((vendor) => (
-          <li key={`vendor:${vendor.slug}`}>
-            <Link href={buildBrowseByVendorPageHref(vendor)}>
-              {vendor.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+
+      <Main>
+        <h2>Par famille</h2>
+        <ul>
+          {categories.map((category) => (
+            <li key={`category:${category.slug}`}>
+              <Link href={buildBrowseByCategoryPageHref(category)}>
+                {category.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <h2>Par fournisseur</h2>
+        <ul>
+          {vendors.map((vendor) => (
+            <li key={`vendor:${vendor.slug}`}>
+              <Link href={buildBrowseByVendorPageHref(vendor)}>
+                {vendor.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Main>
     </Fragment>
   );
 }

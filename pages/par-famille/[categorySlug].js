@@ -5,6 +5,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import Header from '@/components/Header';
+import Main from '@/components/Main';
 import { fetchCategories, fetchCategoryBySlug } from '@/lib/category';
 import { buildProductPageHref } from '@/lib/link';
 import { fetchProducts, fetchProductVendors } from '@/lib/product';
@@ -24,7 +25,7 @@ export default function BrowseByCategoryPage({
 
       <Header />
 
-      <main className="xxl:container xxl:mx-auto">
+      <Main>
         <h2>Par famille&nbsp;: {category.name}</h2>
 
         <p>{products.length} produits</p>
@@ -89,7 +90,7 @@ export default function BrowseByCategoryPage({
             );
           })}
         </ul>
-      </main>
+      </Main>
 
       <pre>{JSON.stringify(category)}</pre>
     </Fragment>

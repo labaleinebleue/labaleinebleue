@@ -3,6 +3,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import Header from '@/components/Header';
+import Main from '@/components/Main';
 import { buildProductPageHref } from '@/lib/link';
 import { fetchProductCategories, fetchProducts } from '@/lib/product';
 import { keyByValueOf } from '@/lib/util';
@@ -21,20 +22,22 @@ export default function BrowseByVendorPage({
 
       <Header />
 
-      <h2>Par fournisseur&nbsp;: {vendor.name}</h2>
+      <Main>
+        <h2>Par fournisseur&nbsp;: {vendor.name}</h2>
 
-      <p>{products.length} produits</p>
+        <p>{products.length} produits</p>
 
-      <ul>
-        {products.map((product) => (
-          <li key="product:{productId}">
-            <Link href={buildProductPageHref(product)}>{product.name}</Link>
-            {' ('}
-            {categoriesByCategoryCode[product.categoryCode].name}
-            {')'}
-          </li>
-        ))}
-      </ul>
+        <ul>
+          {products.map((product) => (
+            <li key="product:{productId}">
+              <Link href={buildProductPageHref(product)}>{product.name}</Link>
+              {' ('}
+              {categoriesByCategoryCode[product.categoryCode].name}
+              {')'}
+            </li>
+          ))}
+        </ul>
+      </Main>
 
       <pre>{JSON.stringify(vendor)}</pre>
     </Fragment>
