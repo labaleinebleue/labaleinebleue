@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import { fetchCategories, fetchCategoryBySlug } from '@/lib/category';
 import { buildProductPageHref } from '@/lib/link';
 import { fetchProducts, fetchProductVendors } from '@/lib/product';
+import { withImagesFirst } from '@/lib/product-util';
 import { keyByValueOf } from '@/lib/util';
 
 export default function BrowseByCategoryPage({
@@ -63,7 +64,10 @@ export async function getStaticProps({ params }) {
   const category = await fetchCategoryBySlug(categorySlug);
 
   // Fetch category products
-  const products = await fetchProducts({ categoryCode: category.code });
+  const products = await fetchProducts(
+    { categoryCode: category.code },
+    { sortBy: [withImagesFirst, 'name'] }
+  );
 
   // Fetch vendors of fetched products
   const productVendors = await fetchProductVendors({
