@@ -1,7 +1,7 @@
 module.exports = {
   images: {
-    // Match Tailwind CSS breakpoints
-    deviceSizes: [640, 768, 1024, 1280, 1920],
+    // Match Tailwind CSS default breakpoints
+    deviceSizes: [640, 768, 1024, 1280, 1536],
 
     domains: ['res.cloudinary.com'],
     loader: 'cloudinary',

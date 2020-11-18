@@ -9,7 +9,7 @@ export default function Header({ title, linkToIndexPage }) {
                   md:text-3xl
                   lg:text-4xl
                   xl:text-5xl
-                  xxl:text-6xl"
+                  2xl:text-6xl"
       >
         {linkToIndexPage ? <Link href="/">{title}</Link> : title}
       </h1>

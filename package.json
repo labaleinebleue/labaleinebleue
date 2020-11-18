@@ -15,19 +15,21 @@
     "lodash": "4.17.20",
     "next": "10.0.2",
     "object-mapper": "6.2.0",
-    "postcss-preset-env": "6.7.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "tailwindcss": "1.9.6"
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "autoprefixer": "10.0.2",
     "eslint": "7.13.0",
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-react-hooks": "4.2.0",
     "googleapis": "65.0.0",
-    "prettier": "2.1.2"
+    "postcss": "8.1.7",
+    "postcss-preset-env": "6.7.0",
+    "prettier": "2.1.2",
+    "tailwindcss": "2.0.1"
   },
   "browserslist": [
     "defaults"

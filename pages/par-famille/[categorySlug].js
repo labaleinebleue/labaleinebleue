@@ -45,11 +45,11 @@ export default function BrowseByCategoryPage({
             return (
               <li
                 className="bg-white relative rounded-lg p-2
-                           h-cmgi-1/1w
-                           md:h-cmgi-1/2w
-                           lg:h-cmgi-1/3w
-                           xl:h-cmgi-1/4w
-                           xxl:h-cmgi-1/4xxl-w"
+                           h-cmgi-1/1-w
+                           md:h-cmgi-1/2-w
+                           lg:h-cmgi-1/3-w
+                           xl:h-cmgi-1/4-w
+                           2xl:h-cmgi-1/4-2xl-w"
                 key="product:{productId}"
               >
                 <div className="h-full relative w-full">
@@ -59,7 +59,7 @@ export default function BrowseByCategoryPage({
                         <Image
                           className="object-contain"
                           src={firstProductImage.href}
-                          sizes="(min-width: 1920px) 30rem,
+                          sizes="(min-width: 1536px) 22.5rem,
                                  (min-width: 1280px) 25vw,
                                  (min-width: 1024px) 33.333333vw,
                                  (min-width: 768px) 50vw,
