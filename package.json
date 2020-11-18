@@ -10,6 +10,9 @@
     "lint": "eslint --cache .",
     "start": "next start"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "@sindresorhus/slugify": "1.1.0",
     "lodash": "4.17.20",
