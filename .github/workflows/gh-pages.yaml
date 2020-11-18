@@ -47,23 +47,17 @@ jobs:
             ${{ runner.os }}-yarn-and-nextjs
 
       - name: Install Yarn dependencies
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
+        run: yarn
 
       - name: Create an optimized production build
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build
+        run: yarn build
         env:
           DATABASE_CODE_TO_ID_SECRET: ${{ secrets.DATABASE_CODE_TO_ID_SECRET }}
           DATABASE_SPREADSHEET_ID: ${{ secrets.DATABASE_SPREADSHEET_ID }}
           NODE_ENV: production
 
       - name: Static HTML Export
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: export
+        run: yarn export
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
