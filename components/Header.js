@@ -8,7 +8,8 @@ export default function Header({ title, linkToIndexPage }) {
         className="font-labaleinebleue text-labaleinebleue-blue text-2xl
                   md:text-3xl
                   lg:text-4xl
-                  xl:text-5xl"
+                  xl:text-5xl
+                  xxl:text-6xl"
       >
         {linkToIndexPage ? <Link href="/">{title}</Link> : title}
       </h1>
