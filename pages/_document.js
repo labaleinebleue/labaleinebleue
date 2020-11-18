@@ -10,7 +10,7 @@ export default class extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body className="bg-labaleinebleue-blue">
           <Main />
           <NextScript />
         </body>
