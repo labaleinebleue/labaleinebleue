@@ -6,6 +6,9 @@ import Main from '@/components/Main';
 import ProductMosaic from '@/components/ProductMosaic';
 import { fetchCategories, fetchCategoryBySlug } from '@/lib/category';
 import { fetchProducts, fetchProductVendors } from '@/lib/product';
+import categoryPropType from '@/lib/prop-types/category-prop-type';
+import productPropType from '@/lib/prop-types/product-prop-type';
+import vendorPropType from '@/lib/prop-types/vendor-prop-type';
 import { withImagesFirst } from '@/lib/product-util';
 
 export default function BrowseByCategoryPage({ category, products, vendors }) {
@@ -36,9 +39,9 @@ export default function BrowseByCategoryPage({ category, products, vendors }) {
 }
 
 BrowseByCategoryPage.propTypes = {
-  category: PropTypes.object,
-  products: PropTypes.array,
-  vendors: PropTypes.object,
+  category: categoryPropType,
+  products: PropTypes.arrayOf(productPropType),
+  vendors: PropTypes.arrayOf(vendorPropType),
 };
 
 export async function getStaticPaths() {

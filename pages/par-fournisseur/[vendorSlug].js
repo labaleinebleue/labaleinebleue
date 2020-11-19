@@ -6,6 +6,9 @@ import Main from '@/components/Main';
 import ProductMosaic from '@/components/ProductMosaic';
 import { fetchProductCategories, fetchProducts } from '@/lib/product';
 import { withImagesFirst } from '@/lib/product-util';
+import categoryPropType from '@/lib/prop-types/category-prop-type';
+import productPropType from '@/lib/prop-types/product-prop-type';
+import vendorPropType from '@/lib/prop-types/vendor-prop-type';
 import { fetchVendors, fetchVendorBySlug } from '@/lib/vendor';
 
 export default function BrowseByVendorPage({ categories, products, vendor }) {
@@ -36,9 +39,9 @@ export default function BrowseByVendorPage({ categories, products, vendor }) {
 }
 
 BrowseByVendorPage.propTypes = {
-  categories: PropTypes.object,
-  products: PropTypes.array,
-  vendor: PropTypes.object,
+  categories: PropTypes.arrayOf(categoryPropType),
+  products: PropTypes.arrayOf(productPropType),
+  vendor: vendorPropType,
 };
 
 export async function getStaticPaths() {
