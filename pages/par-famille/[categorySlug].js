@@ -1,22 +1,14 @@
-import _ from 'lodash';
 import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import Header from '@/components/Header';
 import Main from '@/components/Main';
+import ProductMosaic from '@/components/ProductMosaic';
 import { fetchCategories, fetchCategoryBySlug } from '@/lib/category';
-import { buildProductPageHref } from '@/lib/link';
 import { fetchProducts, fetchProductVendors } from '@/lib/product';
 import { withImagesFirst } from '@/lib/product-util';
-import { keyByValueOf } from '@/lib/util';
 
-export default function BrowseByCategoryPage({
-  category,
-  products,
-  vendorsByVendorCode,
-}) {
+export default function BrowseByCategoryPage({ category, products, vendors }) {
   return (
     <Fragment>
       <Head>
@@ -30,66 +22,12 @@ export default function BrowseByCategoryPage({
 
         <p>{products.length} produits</p>
 
-        <ul
-          className="grid grid-cols-1 p-2 gap-2
-                     md:grid-cols-2 
-                     lg:grid-cols-3 
-                     xl:grid-cols-4"
-        >
-          {products.map((product, index) => {
-            const firstProductImage = _.get(product, 'images[0]');
-            const productPageHref = buildProductPageHref(product);
-            const vendor = vendorsByVendorCode[product.vendorCode];
-            const priority = index <= 1;
-
-            return (
-              <li
-                className="bg-white relative rounded-lg p-2
-                           h-cmgi-1/1-w
-                           md:h-cmgi-1/2-w
-                           lg:h-cmgi-1/3-w
-                           xl:h-cmgi-1/4-w
-                           2xl:h-cmgi-1/4-2xl-w"
-                key="product:{productId}"
-              >
-                <div className="h-full relative w-full">
-                  {firstProductImage && (
-                    <Link href={productPageHref} prefetch={false}>
-                      <a>
-                        <Image
-                          className="object-contain"
-                          src={firstProductImage.href}
-                          sizes="(min-width: 1536px) 22.5rem,
-                                 (min-width: 1280px) 25vw,
-                                 (min-width: 1024px) 33.333333vw,
-                                 (min-width: 768px) 50vw,
-                                 100vw"
-                          alt={`${category.name} « ${product.name} »`}
-                          layout="fill"
-                          quality={75}
-                          priority={priority}
-                        />
-                      </a>
-                    </Link>
-                  )}
-                </div>
-
-                <div className="absolute bg-labaleinebleue-white bg-opacity-75 bottom-0 left-0 p-2 right-0 rounded-lg">
-                  <Link href={productPageHref} prefetch={false}>
-                    <a
-                      className="font-bold text-labaleinebleue-blue text-lg
-                                 active:underline
-                                 hover:underline"
-                    >
-                      {product.name}
-                    </a>
-                  </Link>
-                  <div className="text-gray-600 text-xs">{vendor.name}</div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <ProductMosaic
+          categories={[category]}
+          products={products}
+          showCategories={false}
+          vendors={vendors}
+        />
       </Main>
 
       <pre>{JSON.stringify(category)}</pre>
@@ -100,7 +38,7 @@ export default function BrowseByCategoryPage({
 BrowseByCategoryPage.propTypes = {
   category: PropTypes.object,
   products: PropTypes.array,
-  vendorsByVendorCode: PropTypes.object,
+  vendors: PropTypes.object,
 };
 
 export async function getStaticPaths() {
@@ -125,13 +63,10 @@ export async function getStaticProps({ params }) {
     { sortBy: [withImagesFirst, 'name'] }
   );
 
-  // Fetch vendors of fetched products
-  const productVendors = await fetchProductVendors({
+  // Fetch category vendors
+  const vendors = await fetchProductVendors({
     categoryCode: category.code,
   });
 
-  // Arrange vendors in an object keyed by vendor code
-  const vendorsByVendorCode = keyByValueOf(productVendors, 'code');
-
-  return { props: { category, vendorsByVendorCode, products } };
+  return { props: { category, products, vendors } };
 }
