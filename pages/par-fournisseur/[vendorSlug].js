@@ -1,19 +1,14 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import Header from '@/components/Header';
 import Main from '@/components/Main';
-import { buildProductPageHref } from '@/lib/link';
+import ProductMosaic from '@/components/ProductMosaic';
 import { fetchProductCategories, fetchProducts } from '@/lib/product';
-import { keyByValueOf } from '@/lib/util';
+import { withImagesFirst } from '@/lib/product-util';
 import { fetchVendors, fetchVendorBySlug } from '@/lib/vendor';
 
-export default function BrowseByVendorPage({
-  categoriesByCategoryCode,
-  products,
-  vendor,
-}) {
+export default function BrowseByVendorPage({ categories, products, vendor }) {
   return (
     <Fragment>
       <Head>
@@ -27,16 +22,12 @@ export default function BrowseByVendorPage({
 
         <p>{products.length} produits</p>
 
-        <ul>
-          {products.map((product) => (
-            <li key="product:{productId}">
-              <Link href={buildProductPageHref(product)}>{product.name}</Link>
-              {' ('}
-              {categoriesByCategoryCode[product.categoryCode].name}
-              {')'}
-            </li>
-          ))}
-        </ul>
+        <ProductMosaic
+          categories={categories}
+          products={products}
+          showVendors={false}
+          vendors={[vendor]}
+        />
       </Main>
 
       <pre>{JSON.stringify(vendor)}</pre>
@@ -45,7 +36,7 @@ export default function BrowseByVendorPage({
 }
 
 BrowseByVendorPage.propTypes = {
-  categoriesByCategoryCode: PropTypes.object,
+  categories: PropTypes.object,
   products: PropTypes.array,
   vendor: PropTypes.object,
 };
@@ -66,15 +57,15 @@ export async function getStaticProps({ params }) {
   const vendor = await fetchVendorBySlug(vendorSlug);
 
   // Fetch vendor products
-  const products = await fetchProducts({ vendorCode: vendor.code });
+  const products = await fetchProducts(
+    { vendorCode: vendor.code },
+    { sortBy: [withImagesFirst, 'name'] }
+  );
 
-  // Fetch categories of fetched products
-  const productCategories = await fetchProductCategories({
+  // Fetch vendor categories
+  const categories = await fetchProductCategories({
     vendorCode: vendor.code,
   });
 
-  // Arrange categories in an object keyed by category code
-  const categoriesByCategoryCode = keyByValueOf(productCategories, 'code');
-
-  return { props: { categoriesByCategoryCode, products, vendor } };
+  return { props: { categories, products, vendor } };
 }
