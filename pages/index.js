@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import Header from '@/components/Header';
+import Hero from '@/components/Hero';
 import Main from '@/components/Main';
 import {
   buildBrowseByCategoryPageHref,
@@ -20,6 +21,7 @@ export default function IndexPage({ categories, vendors }) {
       <Header linkToIndexPage={false} />
 
       <Main>
+        <Hero />
         <h2>Par famille</h2>
         <ul>
           {categories.map((category) => (
